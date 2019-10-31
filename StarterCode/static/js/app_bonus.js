@@ -1,3 +1,5 @@
+var tableData = data;
+
 var tbody = d3.select("tbody");
 tableData.forEach(function (InitialList) {
   console.log(InitialList);
@@ -16,6 +18,15 @@ var button = d3.select("#filter-btn");
 
 button.on("click", function () {
   tbody.html("");
+  var inputElement = d3.select("#datetime");
+
+  var inputValue = inputElement.property("value");
+  console.log(inputValue);
+  console.log(tableData);
+  a
+  filteredData = tableData.filter(tableData => tableData.datetime === inputValue);
+
+  console.log(filteredData);
 
   var inputcity = d3.select("#city");
   var tableData = data;
@@ -48,4 +59,16 @@ button.on("click", function () {
   if (inputValueshape) {
     var filteredData = tableData.filter(tableData => tableData.shape === inputValueshape)
   };
+
+  filteredData.forEach(function (ufosighting) {
+    console.log(ufosighting);
+    var row = tbody.append("tr");
+    Object.entries(ufosighting).forEach(function ([key, value]) {
+      console.log(key, value);
+      // Append a cell to the row for each value
+      // in the weather report object
+      var cell = row.append("td");
+      cell.text(value);
+    });
+  });
 });
